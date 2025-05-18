@@ -1,0 +1,750 @@
+
+            <html class="">
+              
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+      window.FontAwesomeConfig = {
+          autoReplaceSvg: 'nest', // Options: 'nest', 'remove', 'replace'
+      };
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    
+<style>
+  * {
+    font-family: "Inter", sans-serif;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+    
+<style>
+  .highlighted-section {
+    outline: 2px solid #3F20FB;
+    background-color: rgba(63, 32, 251, 0.1);
+  }
+
+  .edit-button {
+    position: absolute;
+    z-index: 1000;
+  }
+</style>
+
+    
+<style>
+   :root {
+          /* Base colors */
+          --color-base: #ffffff;
+          --color-base-50: #f9fafb;
+          --color-base-100: #f3f4f6;
+          --color-base-200: #e5e7eb;
+          --color-base-300: #d1d5db;
+          --color-base-400: #9ca3af;
+          --color-base-500: #6b7280;
+          --color-base-600: #4b5563;  
+          --color-base-700: #374151;
+          --color-base-800: #1f2937;  
+          --color-base-900: #111827;
+          --color-base-content: #1f2937;
+
+          /* Primary colors */
+          --color-primary: #3b82f6;
+          --color-primary-50: #eff6ff;
+          --color-primary-100: #dbeafe;
+          --color-primary-200: #bfdbfe;
+          --color-primary-300: #93c5fd;
+          --color-primary-400: #60a5fa;
+          --color-primary-500: #3b82f6;
+          --color-primary-600: #2563eb;
+          --color-primary-700: #1d4ed8;
+          --color-primary-800: #1e40af;
+          --color-primary-900: #1e3a8a;
+          --color-primary-focus: #2563eb;
+          --color-primary-content: #ffffff;
+
+          /* Secondary colors */
+          --color-secondary: #8b5cf6;
+          --color-secondary-50: #f5f3ff;
+          --color-secondary-100: #ede9fe;
+          --color-secondary-200: #ddd6fe;
+          --color-secondary-300: #c4b5fd;
+          --color-secondary-400: #a78bfa;
+          --color-secondary-500: #8b5cf6;
+          --color-secondary-600: #7c3aed;
+          --color-secondary-700: #6d28d9;
+          --color-secondary-800: #5b21b6;
+          --color-secondary-900: #4c1d95;
+          --color-secondary-focus: #7c3aed;
+          --color-secondary-content: #ffffff;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #fdf2f8;
+          --color-accent-100: #fce7f3;
+          --color-accent-200: #fbcfe8;
+          --color-accent-300: #f9a8d4;
+          --color-accent-400: #f472b6;
+          --color-accent-500: #ec4899;
+          --color-accent-600: #db2777;
+          --color-accent-700: #be185d;
+          --color-accent-800: #9d174d;
+          --color-accent-900: #831843;
+          --color-accent-focus: #db2777;
+          --color-accent-content: #ffffff;
+
+          /* Neutral colors */
+          --color-neutral: #6b7280;
+          --color-neutral-50: #f9fafb;
+          --color-neutral-100: #f3f4f6;
+          --color-neutral-200: #e5e7eb;
+          --color-neutral-300: #d1d5db;
+          --color-neutral-400: #9ca3af;
+          --color-neutral-500: #6b7280;
+          --color-neutral-600: #4b5563;
+          --color-neutral-700: #374151;
+          --color-neutral-800: #1f2937;
+          --color-neutral-900: #111827;
+          --color-neutral-focus: #4b5563;
+          --color-neutral-content: #ffffff;
+
+          /* Info colors */
+          --color-info: #3b82f6;
+          --color-info-50: #eff6ff;
+          --color-info-100: #dbeafe;
+          --color-info-200: #bfdbfe;
+          --color-info-300: #93c5fd;
+          --color-info-400: #60a5fa;
+          --color-info-500: #3b82f6;
+          --color-info-600: #2563eb;
+          --color-info-700: #1d4ed8;
+          --color-info-800: #1e40af;
+          --color-info-900: #1e3a8a;
+          --color-info-focus: #2563eb;
+          --color-info-content: #ffffff;
+
+          /* Success colors */
+          --color-success: #10b981;
+          --color-success-50: #ecfdf5;
+          --color-success-100: #d1fae5;
+          --color-success-200: #a7f3d0;
+          --color-success-300: #6ee7b7;
+          --color-success-400: #34d399;
+          --color-success-500: #10b981;
+          --color-success-600: #059669;
+          --color-success-700: #047857;
+          --color-success-800: #065f46;
+          --color-success-900: #064e3b;
+          --color-success-focus: #059669;
+          --color-success-content: #ffffff;
+
+          /* Warning colors */
+          --color-warning: #f59e0b;
+          --color-warning-50: #fffbeb;
+          --color-warning-100: #fef3c7;
+          --color-warning-200: #fde68a;
+          --color-warning-300: #fcd34d;
+          --color-warning-400: #fbbf24;
+          --color-warning-500: #f59e0b;
+          --color-warning-600: #d97706;
+          --color-warning-700: #b45309;
+          --color-warning-800: #92400e;
+          --color-warning-900: #78350f;
+          --color-warning-focus: #d97706;
+          --color-warning-content: #ffffff;
+
+          /* Error colors */
+          --color-error: #ef4444;
+          --color-error-50: #fef2f2;
+          --color-error-100: #fee2e2;
+          --color-error-200: #fecaca;
+          --color-error-300: #fca5a5;
+          --color-error-400: #f87171;
+          --color-error-500: #ef4444;
+          --color-error-600: #dc2626;
+          --color-error-700: #b91c1c;
+          --color-error-800: #991b1b;
+          --color-error-900: #7f1d1d;
+          --color-error-focus: #dc2626;
+          --color-error-content: #ffffff;
+        }
+</style>
+
+    
+<style>
+/* Dark theme */
+        .dark {
+          /* Base colors */
+          --color-base: #1f2937;
+          --color-base-50: #111827;
+          --color-base-100: #1f2937;
+          --color-base-200: #374151;
+          --color-base-300: #4b5563;
+          --color-base-400: #6b7280;
+          --color-base-500: #9ca3af;
+          --color-base-600: #d1d5db;
+          --color-base-700: #e5e7eb;
+          --color-base-800: #f3f4f6;
+          --color-base-900: #f9fafb;
+          --color-base-content: #f9fafb;
+
+          /* Primary colors */
+          --color-primary: #60a5fa;
+          --color-primary-50: #1e3a8a;
+          --color-primary-100: #1e40af;
+          --color-primary-200: #1d4ed8;
+          --color-primary-300: #2563eb;
+          --color-primary-400: #3b82f6;
+          --color-primary-500: #60a5fa;
+          --color-primary-600: #93c5fd;
+          --color-primary-700: #bfdbfe;
+          --color-primary-800: #dbeafe;
+          --color-primary-900: #eff6ff;
+          --color-primary-focus: #3b82f6;
+          --color-primary-content: #1f2937;
+
+          /* Secondary colors */
+          --color-secondary: #a78bfa;
+          --color-secondary-50: #4c1d95;
+          --color-secondary-100: #5b21b6;
+          --color-secondary-200: #6d28d9;
+          --color-secondary-300: #7c3aed;
+          --color-secondary-400: #8b5cf6;
+          --color-secondary-500: #a78bfa;
+          --color-secondary-600: #c4b5fd;
+          --color-secondary-700: #ddd6fe;
+          --color-secondary-800: #ede9fe;
+          --color-secondary-900: #f5f3ff;
+          --color-secondary-focus: #8b5cf6;
+          --color-secondary-content: #1f2937;
+
+          /* Accent colors */
+          --color-accent: #f472b6;
+          --color-accent-50: #831843;
+          --color-accent-100: #9d174d;
+          --color-accent-200: #be185d;
+          --color-accent-300: #db2777;
+          --color-accent-400: #ec4899;
+          --color-accent-500: #f472b6;
+          --color-accent-600: #f9a8d4;
+          --color-accent-700: #fbcfe8;
+          --color-accent-800: #fce7f3;
+          --color-accent-900: #fdf2f8;
+          --color-accent-focus: #ec4899;
+          --color-accent-content: #1f2937;
+
+          /* Neutral colors remain the same as light theme */
+
+          /* Info colors */
+          --color-info: #60a5fa;
+          --color-info-50: #1e3a8a;
+          --color-info-100: #1e40af;
+          --color-info-200: #1d4ed8;
+          --color-info-300: #2563eb;
+          --color-info-400: #3b82f6;
+          --color-info-500: #60a5fa;
+          --color-info-600: #93c5fd;
+          --color-info-700: #bfdbfe;
+          --color-info-800: #dbeafe;
+          --color-info-900: #eff6ff;
+          --color-info-focus: #3b82f6;
+          --color-info-content: #1f2937;
+
+          /* Success colors */
+          --color-success: #34d399;
+          --color-success-50: #064e3b;
+          --color-success-100: #065f46;
+          --color-success-200: #047857;
+          --color-success-300: #059669;
+          --color-success-400: #10b981;
+          --color-success-500: #34d399;
+          --color-success-600: #6ee7b7;
+          --color-success-700: #a7f3d0;
+          --color-success-800: #d1fae5;
+          --color-success-900: #ecfdf5;
+          --color-success-focus: #10b981;
+          --color-success-content: #1f2937;
+
+          /* Warning colors */
+          --color-warning: #fbbf24;
+          --color-warning-50: #78350f;
+          --color-warning-100: #92400e;
+          --color-warning-200: #b45309;
+          --color-warning-300: #d97706;
+          --color-warning-400: #f59e0b;
+          --color-warning-500: #fbbf24;
+          --color-warning-600: #fcd34d;
+          --color-warning-700: #fde68a;
+          --color-warning-800: #fef3c7;
+          --color-warning-900: #fffbeb;
+          --color-warning-focus: #f59e0b;
+          --color-warning-content: #1f2937;
+
+          /* Error colors */
+          --color-error: #f87171;
+          --color-error-50: #7f1d1d;
+          --color-error-100: #991b1b;
+          --color-error-200: #b91c1c;
+          --color-error-300: #dc2626;
+          --color-error-400: #ef4444;
+          --color-error-500: #f87171;
+          --color-error-600: #fca5a5;
+          --color-error-700: #fecaca;
+          --color-error-800: #fee2e2;
+          --color-error-900: #fef2f2;
+          --color-error-focus: #ef4444;
+          --color-error-content: #1f2937;
+        }
+</style>
+
+    
+  <script>
+        tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                ...{"transparent":"transparent","current":"currentColor","black":"#000000","white":"#ffffff","gray":{"50":"#f9fafb","100":"#f3f4f6","200":"#e5e7eb","300":"#d1d5db","400":"#9ca3af","500":"#6b7280","600":"#4b5563","700":"#374151","800":"#1f2937","900":"#111827"},"red":{"50":"#fef2f2","100":"#fee2e2","200":"#fecaca","300":"#fca5a5","400":"#f87171","500":"#ef4444","600":"#dc2626","700":"#b91c1c","800":"#991b1b","900":"#7f1d1d"},"yellow":{"50":"#fffbeb","100":"#fef3c7","200":"#fde68a","300":"#fcd34d","400":"#fbbf24","500":"#f59e0b","600":"#d97706","700":"#b45309","800":"#92400e","900":"#78350f"},"green":{"50":"#ecfdf5","100":"#d1fae5","200":"#a7f3d0","300":"#6ee7b7","400":"#34d399","500":"#10b981","600":"#059669","700":"#047857","800":"#065f46","900":"#064e3b"},"blue":{"50":"#eff6ff","100":"#dbeafe","200":"#bfdbfe","300":"#93c5fd","400":"#60a5fa","500":"#3b82f6","600":"#2563eb","700":"#1d4ed8","800":"#1e40af","900":"#1e3a8a"},"indigo":{"50":"#eef2ff","100":"#e0e7ff","200":"#c7d2fe","300":"#a5b4fc","400":"#818cf8","500":"#6366f1","600":"#4f46e5","700":"#4338ca","800":"#3730a3","900":"#312e81"},"purple":{"50":"#f5f3ff","100":"#ede9fe","200":"#ddd6fe","300":"#c4b5fd","400":"#a78bfa","500":"#8b5cf6","600":"#7c3aed","700":"#6d28d9","800":"#5b21b6","900":"#4c1d95"},"pink":{"50":"#fdf2f8","100":"#fce7f3","200":"#fbcfe8","300":"#f9a8d4","400":"#f472b6","500":"#ec4899","600":"#db2777","700":"#be185d","800":"#9d174d","900":"#831843"}},
+                ...{"primary":{"50":"var(--color-primary-50)","100":"var(--color-primary-100)","200":"var(--color-primary-200)","300":"var(--color-primary-300)","400":"var(--color-primary-400)","500":"var(--color-primary-500)","600":"var(--color-primary-600)","700":"var(--color-primary-700)","800":"var(--color-primary-800)","900":"var(--color-primary-900)","DEFAULT":"var(--color-primary)","focus":"var(--color-primary-focus)","content":"var(--color-primary-content)"},"secondary":{"50":"var(--color-secondary-50)","100":"var(--color-secondary-100)","200":"var(--color-secondary-200)","300":"var(--color-secondary-300)","400":"var(--color-secondary-400)","500":"var(--color-secondary-500)","600":"var(--color-secondary-600)","700":"var(--color-secondary-700)","800":"var(--color-secondary-800)","900":"var(--color-secondary-900)","DEFAULT":"var(--color-secondary)","focus":"var(--color-secondary-focus)","content":"var(--color-secondary-content)"},"accent":{"50":"var(--color-accent-50)","100":"var(--color-accent-100)","200":"var(--color-accent-200)","300":"var(--color-accent-300)","400":"var(--color-accent-400)","500":"var(--color-accent-500)","600":"var(--color-accent-600)","700":"var(--color-accent-700)","800":"var(--color-accent-800)","900":"var(--color-accent-900)","DEFAULT":"var(--color-accent)","focus":"var(--color-accent-focus)","content":"var(--color-accent-content)"},"neutral":{"50":"var(--color-neutral-50)","100":"var(--color-neutral-100)","200":"var(--color-neutral-200)","300":"var(--color-neutral-300)","400":"var(--color-neutral-400)","500":"var(--color-neutral-500)","600":"var(--color-neutral-600)","700":"var(--color-neutral-700)","800":"var(--color-neutral-800)","900":"var(--color-neutral-900)","DEFAULT":"var(--color-neutral)","focus":"var(--color-neutral-focus)","content":"var(--color-neutral-content)"},"info":{"50":"var(--color-info-50)","100":"var(--color-info-100)","200":"var(--color-info-200)","300":"var(--color-info-300)","400":"var(--color-info-400)","500":"var(--color-info-500)","600":"var(--color-info-600)","700":"var(--color-info-700)","800":"var(--color-info-800)","900":"var(--color-info-900)","DEFAULT":"var(--color-info)","focus":"var(--color-info-focus)","content":"var(--color-info-content)"},"success":{"50":"var(--color-success-50)","100":"var(--color-success-100)","200":"var(--color-success-200)","300":"var(--color-success-300)","400":"var(--color-success-400)","500":"var(--color-success-500)","600":"var(--color-success-600)","700":"var(--color-success-700)","800":"var(--color-success-800)","900":"var(--color-success-900)","DEFAULT":"var(--color-success)","focus":"var(--color-success-focus)","content":"var(--color-success-content)"},"warning":{"50":"var(--color-warning-50)","100":"var(--color-warning-100)","200":"var(--color-warning-200)","300":"var(--color-warning-300)","400":"var(--color-warning-400)","500":"var(--color-warning-500)","600":"var(--color-warning-600)","700":"var(--color-warning-700)","800":"var(--color-warning-800)","900":"var(--color-warning-900)","DEFAULT":"var(--color-warning)","focus":"var(--color-warning-focus)","content":"var(--color-warning-content)"},"error":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"danger":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"},"failure":{"50":"var(--color-error-50)","100":"var(--color-error-100)","200":"var(--color-error-200)","300":"var(--color-error-300)","400":"var(--color-error-400)","500":"var(--color-error-500)","600":"var(--color-error-600)","700":"var(--color-error-700)","800":"var(--color-error-800)","900":"var(--color-error-900)","DEFAULT":"var(--color-error)","focus":"var(--color-error-focus)","content":"var(--color-error-content)"}},
+                },
+              },
+            },
+            variants: {
+              extend: {
+                backgroundColor: ['active', 'group-hover'],
+                textColor: ['active', 'group-hover'],
+              },
+            },
+            plugins: [],
+          };
+  </script>
+
+</head>
+
+              <body class="h-full text-base-content">
+                <header id="header" class="bg-white shadow-sm py-4 fixed w-full z-50">
+  <div class="container mx-auto px-4 md:px-8 flex justify-between items-center">
+    <div class="flex items-center">
+      <i class="fa-solid fa-cloud-arrow-up text-indigo-600 text-2xl mr-3"></i>
+      <h1 class="text-xl font-bold text-gray-800">WordPress Content Uploader</h1>
+    </div>
+    <nav class="hidden md:flex space-x-6">
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">How It Works</span>
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">CSV Format</span>
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">FAQ</span>
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Contact</span>
+    </nav>
+    <button class="md:hidden text-gray-600" id="mobile-menu-button">
+      <i class="fa-solid fa-bars text-xl"></i>
+    </button>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white w-full border-t border-gray-100 py-3 px-4 absolute top-full left-0 shadow-md">
+    <div class="flex flex-col space-y-3">
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">How It Works</span>
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">CSV Format</span>
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">FAQ</span>
+      <span class="text-gray-600 hover:text-indigo-600 transition-colors cursor-pointer">Contact</span>
+    </div>
+  </div>
+</header>
+
+<main class="pt-20">
+  <!-- Hero Section -->
+  <section id="hero" class="bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 py-20 md:py-28">
+    <div class="container mx-auto px-4 md:px-8 text-center">
+      <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 leading-tight">Upload AI-Generated WordPress Content – In Seconds!</h1>
+      <p class="text-lg md:text-xl text-white/90 max-w-3xl mx-auto mb-10">Just upload your CSV, and let the system do the rest – generating content using AI and publishing it to your WordPress sites automatically.</p>
+      <span class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 hover:bg-gray-50 cursor-pointer">
+        Get Started <i class="fa-solid fa-arrow-right ml-2"></i>
+      </span>
+    </div>
+  </section>
+
+  <!-- Upload Section -->
+  <section id="upload" class="py-16 bg-white">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 text-center">Upload Your CSV File</h2>
+        <p class="text-gray-600 text-center mb-10">Your content will be generated and published automatically after upload</p>
+        
+        {# Section for displaying flashed messages #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <div class="mb-8">
+            {% for category, message in messages %}
+              <div class="p-4 rounded-md
+                {% if category == 'error' %} bg-red-100 border border-red-300 text-red-700
+                {% elif category == 'success' %} bg-green-100 border border-green-300 text-green-700
+                {% else %} bg-blue-100 border border-blue-300 text-blue-700
+                {% endif %}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form id="upload-form" method="POST" action="{{ url_for('upload_csv_file') }}" enctype="multipart/form-data" class="border-2 border-dashed border-indigo-300 rounded-lg p-8 md:p-12 bg-indigo-50 text-center mb-8 cursor-pointer hover:bg-indigo-100 transition-colors">
+          {# Note: The original div with id="upload-container" is now this form #}
+          <div id="upload-default" class="flex flex-col items-center">
+            <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-md">
+              <i class="fa-solid fa-cloud-arrow-up text-indigo-500 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Drag & Drop Your CSV File Here</h3>
+            <p class="text-gray-600 mb-4">or</p>
+            <button type="button" id="browse-files-button" class="bg-indigo-600 text-white font-medium py-2 px-6 rounded-full hover:bg-indigo-700 transition-colors">Browse Files</button>
+            <input type="file" id="file-upload" name="file" class="hidden" accept=".csv"> {# Added name="file" #}
+          </div>
+          
+          <div id="upload-success" class="hidden flex flex-col items-center">
+            <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-md">
+              <i class="fa-solid fa-check text-green-500 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">File Selected</h3>
+            <p id="file-name" class="text-gray-600 mb-4">filename.csv</p>
+            <div class="flex space-x-4">
+              <button type="button" id="remove-file" class="bg-white text-gray-700 border border-gray-300 font-medium py-2 px-6 rounded-full hover:bg-gray-50 transition-colors">
+                Remove
+              </button>
+              {# Changed to type="submit" #}
+              <button type="submit" id="start-process" class="bg-indigo-600 text-white font-medium py-2 px-6 rounded-full hover:bg-indigo-700 transition-colors">
+                Start Process
+              </button>
+            </div>
+          </div>
+        </form>
+        
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start">
+          <i class="fa-solid fa-circle-info text-blue-500 mt-1 mr-3"></i>
+          <p class="text-blue-800 text-sm">Make sure your CSV follows our required format. See the CSV Format section below for details and examples.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works Section -->
+  <section id="how-it-works" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 md:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 text-center">How It Works</h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Our simple 3-step process automates your WordPress content publishing workflow</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Step 1 -->
+        <div class="bg-white rounded-xl shadow-md p-6 relative">
+          <div class="absolute -top-5 -left-5 bg-indigo-600 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-md">1</div>
+          <div class="flex flex-col items-center text-center">
+            <div class="bg-indigo-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+              <i class="fa-solid fa-file-csv text-indigo-600 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Upload CSV</h3>
+            <p class="text-gray-600">Upload your CSV file with blog post titles and WordPress site details.</p>
+          </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="bg-white rounded-xl shadow-md p-6 relative">
+          <div class="absolute -top-5 -left-5 bg-purple-600 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-md">2</div>
+          <div class="flex flex-col items-center text-center">
+            <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+              <i class="fa-solid fa-robot text-purple-600 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">AI Generates Content</h3>
+            <p class="text-gray-600">Our AI engine creates high-quality, optimized blog posts based on your titles.</p>
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="bg-white rounded-xl shadow-md p-6 relative">
+          <div class="absolute -top-5 -left-5 bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shadow-md">3</div>
+          <div class="flex flex-col items-center text-center">
+            <div class="bg-pink-100 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+              <i class="fa-brands fa-wordpress text-pink-600 text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Auto-Publishing</h3>
+            <p class="text-gray-600">Posts are automatically published to your WordPress sites via API.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CSV Format Section -->
+  <section id="csv-format" class="py-16 bg-white">
+    <div class="container mx-auto px-4 md:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 text-center">Required CSV Format</h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Your CSV file must include these columns for the system to work properly</p>
+      
+      <div class="max-w-4xl mx-auto overflow-x-auto mb-10">
+        <div class="bg-white rounded-xl shadow-lg border border-gray-200">
+          <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 rounded-t-xl">
+            <h3 class="text-white font-semibold">CSV File Example</h3>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-50 border-b border-gray-200">
+                <tr>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Title</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Domain</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">User</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Pass</th>
+                  <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">CategoryID</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-sm text-gray-800">Welcome Post</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">https://example.com</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">admin</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">1234abcd</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">5</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-sm text-gray-800">About Us</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">https://mysite.net</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">editor</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">qwerty12</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">3</td>
+                </tr>
+                <tr class="hover:bg-gray-50">
+                  <td class="px-6 py-4 text-sm text-gray-800">Services Page</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">https://blog.org</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">author</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">pass123!</td>
+                  <td class="px-6 py-4 text-sm text-gray-800">8</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <div class="max-w-4xl mx-auto">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Column Descriptions</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white rounded-lg shadow p-5 border-l-4 border-indigo-500">
+            <h4 class="font-semibold text-gray-800 mb-2">Title</h4>
+            <p class="text-gray-600 text-sm">The title of your blog post. The AI will generate content based on this title.</p>
+          </div>
+          <div class="bg-white rounded-lg shadow p-5 border-l-4 border-indigo-500">
+            <h4 class="font-semibold text-gray-800 mb-2">Domain</h4>
+            <p class="text-gray-600 text-sm">The full URL of your WordPress website (including https://).</p>
+          </div>
+          <div class="bg-white rounded-lg shadow p-5 border-l-4 border-indigo-500">
+            <h4 class="font-semibold text-gray-800 mb-2">User</h4>
+            <p class="text-gray-600 text-sm">WordPress username with publishing privileges.</p>
+          </div>
+          <div class="bg-white rounded-lg shadow p-5 border-l-4 border-indigo-500">
+            <h4 class="font-semibold text-gray-800 mb-2">Pass</h4>
+            <p class="text-gray-600 text-sm">WordPress password for the specified user.</p>
+          </div>
+          <div class="bg-white rounded-lg shadow p-5 border-l-4 border-indigo-500 md:col-span-2">
+            <h4 class="font-semibold text-gray-800 mb-2">CategoryID</h4>
+            <p class="text-gray-600 text-sm">The numeric ID of the WordPress category where the post should be published. You can find this in your WordPress dashboard under Categories.</p>
+          </div>
+        </div>
+        
+        <div class="mt-8 flex justify-center">
+          <a href="{{ url_for('download_sample') }}" class="flex items-center text-indigo-600 hover:text-indigo-800 font-medium cursor-pointer">
+            <i class="fa-solid fa-download mr-2"></i>
+            Download Sample CSV Template
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 md:px-8">
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3 text-center">Frequently Asked Questions</h2>
+      <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Get answers to common questions about the WordPress Content Uploader</p>
+      
+      <div class="max-w-3xl mx-auto space-y-6">
+        <!-- FAQ Item 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <button class="faq-toggle w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+            <span class="font-semibold text-gray-800">Can I review the post before it's published?</span>
+            <i class="fa-solid fa-chevron-down text-indigo-500 transition-transform"></i>
+          </button>
+          <div class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <p class="text-gray-600">Currently, the system automatically publishes posts without a review step. However, all posts are saved as drafts by default, and you can enable the "Auto-Publish" option in your settings if you want them to go live immediately. You can always log in to your WordPress dashboard to review and edit posts before manually publishing them.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <button class="faq-toggle w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+            <span class="font-semibold text-gray-800">Are images added automatically?</span>
+            <i class="fa-solid fa-chevron-down text-indigo-500 transition-transform"></i>
+          </button>
+          <div class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <p class="text-gray-600">Yes, our AI system automatically searches for and adds relevant royalty-free images to your posts. By default, each post includes a featured image and 2-3 in-content images. You can adjust these settings in your account preferences if you'd like more or fewer images.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <button class="faq-toggle w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+            <span class="font-semibold text-gray-800">How many posts can I upload at once?</span>
+            <i class="fa-solid fa-chevron-down text-indigo-500 transition-transform"></i>
+          </button>
+          <div class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <p class="text-gray-600">The standard plan allows you to upload up to 50 posts in a single CSV file. Enterprise users can upload up to 500 posts at once. If you need to process larger batches, please contact our support team for a custom solution.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 4 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+          <button class="faq-toggle w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+            <span class="font-semibold text-gray-800">What AI models are used to generate content?</span>
+            <i class="fa-solid fa-chevron-down text-indigo-500 transition-transform"></i>
+          </button>
+          <div class="faq-content hidden px-6 py-4 bg-gray-50 border-t border-gray-100">
+            <p class="text-gray-600">Our system uses a combination of advanced AI models including GPT-4, UX Pilot, and DeepSeek. You can select your preferred AI model in the account settings, or let our system automatically choose the best model for each type of content.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section id="cta" class="py-16 bg-gradient-to-r from-indigo-600 to-purple-600">
+    <div class="container mx-auto px-4 md:px-8 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Ready to Automate Your WordPress Content?</h2>
+      <p class="text-white/90 mb-8 max-w-2xl mx-auto">Save hours of manual work and let AI create and publish engaging blog posts for you.</p>
+      <span class="inline-block bg-white text-indigo-600 font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 cursor-pointer">
+        Upload Your CSV Now
+      </span>
+    </div>
+  </section>
+</main>
+
+<footer id="footer" class="bg-gray-800 text-white py-12">
+  <div class="container mx-auto px-4 md:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="md:col-span-2">
+        <div class="flex items-center mb-4">
+          <i class="fa-solid fa-cloud-arrow-up text-indigo-400 text-2xl mr-3"></i>
+          <h2 class="text-xl font-bold">WordPress Content Uploader</h2>
+        </div>
+        <p class="text-gray-400 mb-4">Automate your WordPress content creation and publishing with the power of AI.</p>
+        <div class="flex space-x-4">
+          <span class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <i class="fa-brands fa-twitter text-xl"></i>
+          </span>
+          <span class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <i class="fa-brands fa-facebook text-xl"></i>
+          </span>
+          <span class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <i class="fa-brands fa-linkedin text-xl"></i>
+          </span>
+          <span class="text-gray-400 hover:text-white transition-colors cursor-pointer">
+            <i class="fa-brands fa-youtube text-xl"></i>
+          </span>
+        </div>
+      </div>
+      
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+        <ul class="space-y-2">
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">Home</span></li>
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">How It Works</span></li>
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">CSV Format</span></li>
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">FAQ</span></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h3 class="text-lg font-semibold mb-4">Legal</h3>
+        <ul class="space-y-2">
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">Terms of Use</span></li>
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">Privacy Policy</span></li>
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">Cookie Policy</span></li>
+          <li><span class="text-gray-400 hover:text-white transition-colors cursor-pointer">Contact Us</span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
+      <p>© 2025 WordPress Content Uploader. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  document.getElementById('mobile-menu-button').addEventListener('click', function() {
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+  });
+  
+  // File upload functionality
+  const uploadContainer = document.getElementById('upload-form');
+  const fileUpload = document.getElementById('file-upload');
+  const uploadDefault = document.getElementById('upload-default');
+  const uploadSuccess = document.getElementById('upload-success');
+  const fileName = document.getElementById('file-name');
+  const removeFileBtn = document.getElementById('remove-file');
+  const startProcessBtn = document.getElementById('start-process');
+  const browseFilesBtn = document.getElementById('browse-files-button');
+  
+  // Trigger file input click when the form (or specific browse button) is clicked
+  // Ensure this doesn't interfere with drag/drop if you implement that
+  if (uploadContainer) {
+    uploadContainer.addEventListener('click', function(e) {
+      // Only trigger file input if the click is on the "upload-default" or "browse-files-button" area
+      // and not on the success state buttons
+      if (e.target.id === 'browse-files-button' || uploadDefault.contains(e.target) && !uploadSuccess.contains(e.target)) {
+        fileUpload.click();
+      }
+    });
+  }
+
+  // If browse button exists, make it trigger file input click
+  if (browseFilesBtn) {
+    browseFilesBtn.addEventListener('click', function() {
+        fileUpload.click();
+    });
+  }
+  
+  fileUpload.addEventListener('change', function(e) {
+    if (e.target.files.length > 0) {
+      fileName.textContent = e.target.files[0].name;
+      uploadDefault.classList.add('hidden');
+      uploadSuccess.classList.remove('hidden');
+    } else {
+      // If no file is selected (e.g., user cancels file dialog), revert to default state
+      uploadSuccess.classList.add('hidden');
+      uploadDefault.classList.remove('hidden');
+    }
+  });
+  
+  removeFileBtn.addEventListener('click', function(e) {
+    e.stopPropagation(); // Prevent form submission or other container clicks
+    fileUpload.value = ''; // Clear the file input
+    uploadSuccess.classList.add('hidden');
+    uploadDefault.classList.remove('hidden');
+  });
+  
+  // FAQ toggles
+  const faqToggles = document.querySelectorAll('.faq-toggle');
+  
+  faqToggles.forEach(toggle => {
+    toggle.addEventListener('click', function() {
+      const content = this.nextElementSibling;
+      const icon = this.querySelector('i');
+      
+      content.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    });
+  });
+</script>
+              </body>
+            </html>
+          
