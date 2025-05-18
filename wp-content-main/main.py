@@ -256,7 +256,7 @@ def process_csv_data(file_path):
 def index():
     # Serve the landing page
     # Ensure 'landing_paage.html' is in the 'templates' folder or adjust path
-    return render_template('landing_paage.html')
+    return render_template('index.html')
 
 @app.route('/upload_csv', methods=['POST'])
 def upload_csv_file():
