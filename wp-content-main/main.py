@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from flask import Flask, request, render_template, redirect, url_for, flash, send_from_directory
 from bs4 import BeautifulSoup
 import base64
@@ -15,9 +17,8 @@ from werkzeug.utils import secure_filename
 # Initialize Flask App
 app = Flask(__name__, template_folder='.') # Serve templates from current dir
 
-# OpenAI API Key - Consider moving to environment variable or config file
 client = OpenAI(
-    api_key= "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", # Please ensure your API key is kept secure
+    api_key=os.getenv("OPENAI_API_KEY")
 )
 
 # Configuration for file uploads
