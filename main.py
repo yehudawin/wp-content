@@ -148,7 +148,7 @@ def upload_to_wordpress(site, user, password, title, content, category_id, featu
     print(f"DEBUG: Attempting to upload post to URL: {url}") # DEBUG LINE
     author = 2 # Ensure these author IDs are valid on your WP site
     post_data = {
-        "date": rand_date(),
+        "date": datetime.datetime.now().isoformat() #rand_date(),
         "author": author,
         "title": title,
         "content": content,
@@ -178,13 +178,13 @@ def process_csv_data(file_path):
         results_log.append(f"Columns found: {df.columns.tolist()}") # Also add to log for UI if needed later
         for index, row in df.iterrows():
             try:
-                # api = row["api"] # api key from CSV, current code uses global client
+                
                 title = str(row['Title'])
                 site = str(row['Domain'])
                 user = str(row['User'])
                 password = str(row['Pass'])
                 category_id = int(row['CategoryID'])
-                
+                # api_key = row["api"] # api key from CSV, current code uses global client
                 print(f"DEBUG: Starting processing for row index {index}, Title: {title}") # DEBUG LINE
                 results_log.append(f"Processing title: {title}")
 
