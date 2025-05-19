@@ -110,12 +110,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Form submission and progress - basic version
     if (uploadForm && startProcessButton) {
-        uploadForm.addEventListener('submit', (e) => {
-            // e.preventDefault(); // Remove this if you want the native form submission to occur for Flask.
-                               // Or, keep it and handle submission with fetch for more control over UI updates (e.g., progress bar)
-            
+        uploadForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default form submission
+
             if (!fileInput.files || fileInput.files.length === 0) {
-                e.preventDefault(); // Prevent submission if no file
                 alert('Please select a CSV file to upload.');
                 return;
             }
@@ -132,34 +130,77 @@ document.addEventListener('DOMContentLoaded', () => {
                 progressContainer.classList.remove('hidden');
                 progressBar.style.width = '0%';
                 progressPercentage.textContent = '0%';
-                currentStatus.textContent = 'Uploading file...';
-
-                // Simulate progress for now.
-                // In a real app, you'd use XHR/Fetch API and listen to 'progress' events
-                // or use a library that handles this.
-                // For Flask, since it's a direct form submission, detailed progress is harder without client-side handling of the upload.
-                // We'll show a generic "processing" state.
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += 10;
-                    if (progress <= 100) {
-                        progressBar.style.width = progress + '%';
-                        progressPercentage.textContent = progress + '%';
-                        if (progress === 100) {
-                           currentStatus.textContent = 'Processing on server... Please wait.';
-                        }
-                    } else {
-                        // If we were using fetch, we wouldn't need this part of the interval.
-                        // Since it's a form submit, the page will reload or redirect.
-                        // This is just a visual placeholder.
-                        clearInterval(interval);
-                    }
-                }, 200);
+                currentStatus.textContent = 'Preparing to upload...';
             }
-            
-            // Allow form to submit after UI updates if not using fetch
-            // If using fetch, the e.preventDefault() above would be active,
-            // and you would trigger the fetch request here.
+
+            const formData = new FormData(uploadForm);
+
+            try {
+                if (currentStatus) currentStatus.textContent = 'Uploading file...';
+                // Visually indicate upload has started
+                if (progressBar) progressBar.style.width = '50%'; 
+                if (progressPercentage) progressPercentage.textContent = '50%';
+
+                const response = await fetch('/upload_csv', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    let successMessage = 'File uploaded and processed successfully!';
+                    try {
+                        const resultText = await response.text(); // Changed from response.json()
+                        // If the server sends a meaningful text response, you might use it.
+                        // For now, we'll stick to a generic success message if response.ok, 
+                        // as parsing HTML for a specific message can be unreliable.
+                        // If you expect a specific text format, you can parse resultText here.
+                        if (resultText && resultText.trim() !== "") {
+                            // Example: if server sends plain text success
+                            // successMessage = resultText;
+                        }
+                        console.log('Server success response (text):', resultText); // Log the text response
+                    } catch (textError) {
+                        console.warn('Error reading response text on success:', textError);
+                    }
+
+                    if (currentStatus) currentStatus.textContent = successMessage;
+                    if (progressBar) progressBar.style.width = '100%';
+                    if (progressPercentage) progressPercentage.textContent = '100%';
+                } else {
+                    let errorMessage = '❌ Error uploading file.';
+                    let errorDetails = `Server responded with status ${response.status}`;
+                    try {
+                        const errorText = await response.text(); // Changed from response.json()
+                        console.warn('Server error response (text):', errorText); // Log the text error
+                        // You could try to extract a more specific error from HTML/text if needed,
+                        // but for now, we use a generic message + status.
+                        if (errorText && errorText.trim() !== "") {
+                           // errorDetails = errorText; // This might be too verbose if it's full HTML
+                        }
+                        errorMessage = `❌ Error uploading file: ${errorDetails}`;
+                    } catch (textError) {
+                        console.warn('Error reading response text on error:', textError);
+                        errorMessage = `❌ Error uploading file: ${errorDetails} (and unable to read error body)`;
+                    }
+                    if (currentStatus) currentStatus.textContent = errorMessage;
+                    if (progressBar) {
+                        progressBar.style.width = '50%';
+                    }
+                    if (progressPercentage) progressPercentage.textContent = 'Error';
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                const networkErrorMessage = '❌ Error uploading file: Network error or server unavailable.';
+                if (currentStatus) currentStatus.textContent = networkErrorMessage;
+                if (progressBar) progressBar.style.width = '0%';
+                if (progressPercentage) progressPercentage.textContent = 'Error';
+                // alert(networkErrorMessage); // Alert was not explicitly requested for network errors
+            } finally {
+                startProcessButton.disabled = false;
+                startProcessButton.textContent = 'Start Process';
+                // The user did not ask to hide the progress bar or reset the file input here
+                // So we leave it as is, allowing the user to see the final status.
+            }
         });
     }
 
