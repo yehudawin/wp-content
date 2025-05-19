@@ -72,11 +72,17 @@ def write_text_with_gpt(text):
         text
     )
 
-def humanize_text_with_gpt(text):
+def humanize_text_with_gpt(text, anchor, link):
     return gpt(
-        f""" please humanize the following text change the text so it will be written from the writer perspective and opinion make sure add emotions in your writing, make sure its written in very simple English and include quirks, imperfections, or conversational tone typical of human writing. keep the *** in the headlines.
-        """,
-        text
+        f"""
+        Please humanize the following text. Rewrite it in a casual, emotional, and opinionated way — as if someone is telling a personal story or experience. Use simple language, conversational tone, and allow for quirks or imperfections in writing. Keep any * headlines untouched.
+        
+        Also, *make sure to include the following anchor and link in the body of the text*:
+        <a href="{link}">{anchor}</a>
+        
+        Here's the original text:
+        {text}
+                """
     )
 
 def get_wordpress_headers(site, user, password):
@@ -184,6 +190,8 @@ def process_csv_data(file_path):
                 user = str(row['User'])
                 password = str(row['Pass'])
                 category_id = int(row['CategoryID'])
+                anchor = int(row['Anchor'])
+                link = int(row['Link'])
                 # api_key = row["api"] # api key from CSV, current code uses global client
                 print(f"DEBUG: Starting processing for row index {index}, Title: {title}") # DEBUG LINE
                 results_log.append(f"Processing title: {title}")
@@ -193,7 +201,7 @@ def process_csv_data(file_path):
                 print(f"DEBUG: Finished write_text_with_gpt for title: '{title}'") # DEBUG LINE
 
                 print(f"DEBUG: Calling humanize_text_with_gpt for title: '{title}'") # DEBUG LINE
-                humanize_text = humanize_text_with_gpt(text)
+                humanize_text = humanize_text_with_gpt(text, anchor ,link)
                 print(f"DEBUG: Finished humanize_text_with_gpt for title: '{title}'") # DEBUG LINE
                 humanize_text = humanize_text.replace("#", "").replace("***\n", "</h4>").replace("***", "<h4>")
                 results_log.append(f"Generated and humanized text for: {title}")
