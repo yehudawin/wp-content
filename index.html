@@ -289,10 +289,78 @@ scrollbar-width: none;
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="py-16 px-4">
-        <div class="container mx-auto max-w-6xl">
+    <section id="faq" class="py-16 px-4 dark:bg-gray-900/30 bg-gray-100">
+        <div class="container mx-auto max-w-4xl">
             <h2 class="text-3xl font-bold mb-12 text-center">Frequently Asked Questions</h2>
-            <!-- תוכן ה-FAQ יתווסף כאן בעתיד -->
+            
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div id="faq-1" class="dark:bg-gray-800/50 bg-white rounded-xl overflow-hidden border border-accent1/20">
+                    <button class="flex justify-between items-center w-full p-6 text-left">
+                        <h3 class="text-xl font-medium">What AI models are used for content generation?</h3>
+                        <i class="fa-solid fa-chevron-down text-accent1"></i>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="dark:text-gray-300 text-gray-600">
+                            We use state-of-the-art AI models including GPT-4, UX Pilot 2, and DeepSeek for content generation. The system automatically selects the best model based on your content requirements to ensure high-quality, relevant, and plagiarism-free content.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div id="faq-2" class="dark:bg-gray-800/50 bg-white rounded-xl overflow-hidden border border-accent1/20">
+                    <button class="flex justify-between items-center w-full p-6 text-left">
+                        <h3 class="text-xl font-medium">Is my WordPress login information secure?</h3>
+                        <i class="fa-solid fa-chevron-down text-accent1"></i>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="dark:text-gray-300 text-gray-600">
+                            Yes, absolutely. We use end-to-end encryption for all credentials. Your WordPress login information is only used during the publishing process and is never stored on our servers after the process completes. We comply with GDPR and other privacy regulations.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div id="faq-3" class="dark:bg-gray-800/50 bg-white rounded-xl overflow-hidden border border-accent1/20">
+                    <button class="flex justify-between items-center w-full p-6 text-left">
+                        <h3 class="text-xl font-medium">How many WordPress sites can I publish to at once?</h3>
+                        <i class="fa-solid fa-chevron-down text-accent1"></i>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="dark:text-gray-300 text-gray-600">
+                            There is no strict limit. Our system is designed to handle bulk publishing to multiple WordPress sites simultaneously. However, for optimal performance, we recommend batches of up to 50 sites at a time. Larger batches may take longer to process.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div id="faq-4" class="dark:bg-gray-800/50 bg-white rounded-xl overflow-hidden border border-accent1/20">
+                    <button class="flex justify-between items-center w-full p-6 text-left">
+                        <h3 class="text-xl font-medium">Can I customize the AI-generated content?</h3>
+                        <i class="fa-solid fa-chevron-down text-accent1"></i>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="dark:text-gray-300 text-gray-600">
+                            Yes, in the Pro version you can add custom instructions for the AI in an additional column of your CSV. This allows you to specify tone, style, key points to include, and other content parameters. The free version uses our standard optimization settings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="cta" class="py-16 px-4">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="dark:bg-gradient-to-r dark:from-accent1/20 dark:to-accent2/20 bg-gradient-to-r from-accent1/10 to-accent2/10 rounded-xl p-10 border border-accent1/30 shadow-lg">
+                <h2 class="text-3xl font-bold mb-4">Ready to Automate Your WordPress Content?</h2>
+                <p class="text-xl dark:text-gray-300 text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Start publishing AI-generated content to multiple WordPress sites with just a few clicks.
+                </p>
+                <span class="px-8 py-4 bg-accent1 text-white rounded-md font-medium text-lg hover:bg-accent1/90 transition-all shadow-lg cursor-pointer">
+                    Get Started Now
+                </span>
+            </div>
         </div>
     </section>
 
@@ -303,6 +371,43 @@ scrollbar-width: none;
             <p class="text-sm">Powered by AI & Your Creativity</p>
         </div>
     </footer>
+    <script>
+        const htmlEl = document.querySelector('html');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+    
+        // Load saved theme or default to light
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            enableDarkMode();
+        } else {
+            enableLightMode();
+        }
+    
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlEl.classList.contains('dark')) {
+                enableLightMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+    
+        function enableDarkMode() {
+            htmlEl.classList.add('dark');
+            darkIcon.classList.add('hidden');
+            lightIcon.classList.remove('hidden');
+            localStorage.setItem('theme', 'dark');
+        }
+    
+        function enableLightMode() {
+            htmlEl.classList.remove('dark');
+            lightIcon.classList.add('hidden');
+            darkIcon.classList.remove('hidden');
+            localStorage.setItem('theme', 'light');
+        }
+    </script>
+    
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
