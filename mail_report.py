@@ -17,7 +17,7 @@ def send_report_email(filepath: str):
     email_host = 'smtp.gmail.com'
     email_port = 587
     email_user = os.getenv('EMAIL_HOST_USER')
-    email_password = os.getenv('EMAIL_HOST_PASSWORD')
+    email_password = os.getenv('APP_PASSWORD')
     email_receiver = os.getenv('EMAIL_RECEIVER')
 
     if not all([email_user, email_password, email_receiver]):
