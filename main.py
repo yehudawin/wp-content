@@ -13,6 +13,7 @@ import sys # Keep sys for potential future use, but stdout redirection will be r
 import os
 import requests
 from werkzeug.utils import secure_filename
+from mail_report import send_report_email
 
 # Initialize Flask App
 app = Flask(__name__, template_folder='.') # Serve templates from current dir
@@ -79,10 +80,10 @@ def humanize_text_with_gpt(text, anchor, link):
         
         Also, *make sure to include the following anchor and link in the body of the text*:
         <a href="{link}">{anchor}</a>
-        
-        Here's the original text:
-        {text}
-                """
+        """
+       ,
+        text
+                
     )
 
 def get_wordpress_headers(site, user, password):
@@ -154,7 +155,7 @@ def upload_to_wordpress(site, user, password, title, content, category_id, featu
     print(f"DEBUG: Attempting to upload post to URL: {url}") # DEBUG LINE
     author = 2 # Ensure these author IDs are valid on your WP site
     post_data = {
-        "date": datetime.datetime.now().isoformat() #rand_date(),
+        "date": datetime.datetime.now().isoformat(), #rand_date(),
         "author": author,
         "title": title,
         "content": content,
@@ -169,14 +170,15 @@ def upload_to_wordpress(site, user, password, title, content, category_id, featu
         res = requests.post(url=url, headers=headers, json=post_data, timeout=60)
         res.raise_for_status()
         print(f"Post '{title}' successfully uploaded to {site}.")
+        # נחזיר את ה-URL של הפוסט שפורסם
+        return res.json().get('link')
     except requests.exceptions.RequestException as e:
         print(f"Failed to upload post '{title}' to {site}. Error: {e}, Response: {res.text if 'res' in locals() else 'No response'}")
+        return None
 
 def process_csv_data(file_path):
-    # This function will contain the logic from the original process_csv
-    # It will be called by the Flask route after a file is uploaded
-    # For now, it will print messages that would appear in gunicorn logs
     results_log = []
+    published_urls = []  # רשימת ה-URLים שפורסמו
     try:
         df = pd.read_csv(file_path, encoding="utf-8-sig")
         print(f"CSV columns identified by pandas: {df.columns.tolist()}") # DEBUG LINE
@@ -184,15 +186,13 @@ def process_csv_data(file_path):
         results_log.append(f"Columns found: {df.columns.tolist()}") # Also add to log for UI if needed later
         for index, row in df.iterrows():
             try:
-                
                 title = str(row['Title'])
                 site = str(row['Domain'])
                 user = str(row['User'])
                 password = str(row['Pass'])
                 category_id = int(row['CategoryID'])
-                anchor = int(row['Anchor'])
-                link = int(row['Link'])
-                # api_key = row["api"] # api key from CSV, current code uses global client
+                anchor = str(row['Anchor'])
+                link = str(row['Link'])
                 print(f"DEBUG: Starting processing for row index {index}, Title: {title}") # DEBUG LINE
                 results_log.append(f"Processing title: {title}")
 
@@ -233,8 +233,9 @@ def process_csv_data(file_path):
                     img_file_path = None # ensure it's defined
 
                 print(f"DEBUG: Calling upload_to_wordpress for site: {site}, title: '{title}'") # DEBUG LINE
-                upload_to_wordpress(site, user, password, title, humanize_text, category_id, image_id)
+                post_url = upload_to_wordpress(site, user, password, title, humanize_text, category_id, image_id)
                 print(f"DEBUG: Finished upload_to_wordpress for title: '{title}'") # DEBUG LINE
+                published_urls.append(post_url if post_url else "")
                 
                 # Clean up local image file after upload (optional)
                 if img_file_path and os.path.exists(img_file_path):
@@ -248,15 +249,23 @@ def process_csv_data(file_path):
                 error_message = f"Error processing row {index} ({title if 'title' in locals() else 'N/A'}): {str(e)}"
                 print(error_message) # Also print to server log for immediate visibility
                 results_log.append(error_message)
+        # הוספת עמודת Published URL ושמירת דוח
+        df['Published URL'] = published_urls
+        report_path = 'upload_report.csv'
+        df.to_csv(report_path, index=False, encoding='utf-8-sig')
+        try:
+            send_report_email(report_path)
+            results_log.append(f"דוח נשלח במייל בהצלחה לכתובת מה-.env")
+        except Exception as e:
+            results_log.append(f"שגיאה בשליחת דוח במייל: {e}")
         results_log.append("Finished processing all rows.")
     except Exception as e:
         error_message = f"Critical error in process_csv_data: {str(e)}"
         print(error_message)
         results_log.append(error_message)
     
-    # For now, we just print the log. Later this could be returned to the user.
     for log_entry in results_log:
-        print(log_entry) 
+        print(log_entry)
     return "\n".join(results_log)
 
 

@@ -1,8 +1,0 @@
-flask
-python-dotenv
-pandas
-requests
-openai
-beautifulsoup4
-werkzeug
-gunicorn
