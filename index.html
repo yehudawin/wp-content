@@ -93,15 +93,21 @@ scrollbar-width: none;
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <i class="fa-solid fa-cloud-arrow-up text-accent1 text-2xl"></i>
-                <span class="text-xl font-bold tracking-tight">WordPress Content Uploader</span>
+                <a href="/" class="text-xl font-bold tracking-tight">
+                    WordPress Content Uploader
+                </a>
+                
             </div>
             <div class="flex items-center">
                 <nav class="hidden md:flex space-x-8 items-center mr-4">
                     <a href="#how-it-works" class="hover:text-accent1 transition-colors cursor-pointer">How It Works</a>
                     <a href="#csv-format" class="hover:text-accent1 transition-colors cursor-pointer">CSV Format</a>
                     <a href="#faq" class="hover:text-accent1 transition-colors cursor-pointer">FAQ</a>
-                    <span class="px-4 py-2 rounded-md border border-accent1 text-accent1 hover:bg-accent1 hover:text-white dark:hover:text-text_dark transition-all shadow-[0_0_10px_0px_rgba(99,102,241,0.3)] cursor-pointer">Contact Us</span>
-                </nav>
+                    <a href="https://wa.me/972542699111" target="_blank" rel="noopener noreferrer"
+                    class="px-4 py-2 rounded-md border border-accent1 text-accent1 hover:bg-accent1 hover:text-white dark:hover:text-text_dark transition-all shadow-[0_0_10px_0px_rgba(99,102,241,0.3)] cursor-pointer">
+                    Contact Us
+                 </a>
+                                 </nav>
                 <button id="theme-toggle" class="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700">
                     <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-xl hidden"></i>
                     <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-xl hidden"></i>
@@ -153,9 +159,11 @@ scrollbar-width: none;
                         <i class="fa-solid fa-cloud-arrow-up text-5xl text-accent1 mb-4"></i>
                         <h3 class="text-xl font-medium mb-2">Drag & Drop your CSV file here</h3>
                         <p class="text-gray-500 dark:text-gray-400 mb-4">or</p>
-                        <button type="button" id="browse-button" class="px-5 py-2 bg-gray-200 dark:bg-gray-800 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors">
-                            Browse Files
-                        </button>
+                        <button type="button" id="browse-button"
+                        class="px-5 py-2 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+                        Browse File
+                    </button>
+                    
                     </div>
                     
                     <!-- File Info (hidden until file is uploaded) -->
@@ -272,6 +280,8 @@ scrollbar-width: none;
                                     <th class="py-3 px-4 text-left font-semibold">User</th>
                                     <th class="py-3 px-4 text-left font-semibold">Pass</th>
                                     <th class="py-3 px-4 text-left font-semibold">CategoryID</th>
+                                    <th class="py-3 px-4 text-left font-semibold">Anchor</th>
+                                    <th class="py-3 px-4 text-left font-semibold">Link</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -281,6 +291,8 @@ scrollbar-width: none;
                                     <td class="py-3 px-4">admin</td>
                                     <td class="py-3 px-4">●●●●●●●●</td>
                                     <td class="py-3 px-4">5</td>
+                                    <td class="py-3 px-4">SEO Tips</td>
+                                    <td class="py-3 px-4"><a href="https://example.com/seo2023" class="text-accent1 hover:underline" target="_blank">Link</a></td>
                                 </tr>
                                 <tr class="border-b border-gray_light_border dark:border-gray_dark_border hover:bg-gray-100 dark:hover:bg-gray-800/30">
                                     <td class="py-3 px-4">How to Improve Website Loading Speed</td>
@@ -288,6 +300,8 @@ scrollbar-width: none;
                                     <td class="py-3 px-4">editor</td>
                                     <td class="py-3 px-4">●●●●●●●</td>
                                     <td class="py-3 px-4">8</td>
+                                    <td class="py-3 px-4">Loading Speed</td>
+                                    <td class="py-3 px-4"><a href="https://mysite.org/speed" class="text-accent1 hover:underline" target="_blank">Link</a></td>
                                 </tr>
                                 <tr class="hover:bg-gray-100 dark:hover:bg-gray-800/30">
                                     <td class="py-3 px-4">Advanced Content Creation with AI</td>
@@ -295,16 +309,21 @@ scrollbar-width: none;
                                     <td class="py-3 px-4">writer_01</td>
                                     <td class="py-3 px-4">●●●●●●</td>
                                     <td class="py-3 px-4">12</td>
+                                    <td class="py-3 px-4">AI Blogging</td>
+                                    <td class="py-3 px-4"><a href="https://blog.example.net/ai" class="text-accent1 hover:underline" target="_blank">Link</a></td>
                                 </tr>
                             </tbody>
                         </table>
+                        
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                 <span class="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-md font-medium hover:border-accent1 dark:hover:border-accent1 transition-all cursor-pointer">
-                    Download CSV Template
-                </span>
+                <a href="/download_sample_csv"
+   class="px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-md font-medium hover:border-accent1 dark:hover:border-accent1 transition-all cursor-pointer">
+   Download CSV Template
+</a>
+
             </div>
         </div>
     </section>
@@ -378,9 +397,9 @@ scrollbar-width: none;
                 <p class="text-xl dark:text-gray-300 text-gray-600 mb-8 max-w-2xl mx-auto">
                     Start publishing AI-generated content to multiple WordPress sites with just a few clicks.
                 </p>
-                <span class="px-8 py-4 bg-accent1 text-white rounded-md font-medium text-lg hover:bg-accent1/90 transition-all shadow-lg cursor-pointer">
+                <a href="#upload-section" class="px-6 py-3 bg-accent1 text-white rounded-md font-medium hover:bg-accent1/90 transition-all shadow-[0_0_15px_0px_rgba(99,102,241,0.5)] cursor-pointer">
                     Get Started Now
-                </span>
+                </a>
             </div>
         </div>
     </section>
