@@ -166,11 +166,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (currentStatus) currentStatus.textContent = successMessage;
                     if (progressBar) progressBar.style.width = '100%';
                     if (progressPercentage) progressPercentage.textContent = '100%';
-                    // הצגת הודעת הצלחה
-                    const successMessageDiv = document.getElementById('success-message');
-                    if (successMessageDiv) {
-                        successMessageDiv.classList.remove('hidden');
-                    }
                 } else {
                     let errorMessage = '❌ Error uploading file.';
                     let errorDetails = `Server responded with status ${response.status}`;
