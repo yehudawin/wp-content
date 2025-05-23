@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PostPilot - WordPress Content Automation</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script> window.FontAwesomeConfig = { autoReplaceSvg: 'nest'};</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -91,10 +99,10 @@ scrollbar-width: none;
     <!-- Header -->
     <header id="header" class="fixed w-full z-10 bg-background/95 dark:bg-background_dark/95 backdrop-blur-sm border-b border-accent1/20 dark:border-accent1/70">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <i class="fa-solid fa-cloud-arrow-up text-accent1 text-2xl"></i>
+            <div class="flex items-center space-x-3">
+                <img src="{{ url_for('static', filename='Logo PostPilot no BG.png') }}" alt="PostPilot Logo" class="h-12 w-12">
                 <a href="/" class="text-xl font-bold tracking-tight">
-                    WordPress Content Uploader
+                    PostPilot
                 </a>
                 
             </div>
@@ -125,10 +133,10 @@ scrollbar-width: none;
             <div class="flex flex-col md:flex-row items-center justify-between gap-12">
                 <div class="md:w-1/2 space-y-6">
                     <h1 class="text-4xl md:text-5xl font-bold leading-tight">
-                        Upload AI-Generated WordPress Content – <span class="text-accent1">In Seconds!</span>
+                        AI-Powered WordPress Content Automation – <span class="text-accent1">With PostPilot!</span>
                     </h1>
                     <p class="text-lg text-gray-600 dark:text-gray-300">
-                        Just upload your CSV, and let the system do the rest – generating content using AI and publishing it to your WordPress sites automatically.
+                        Just upload your CSV, and let PostPilot do the rest – generating content using AI and publishing it to your WordPress sites automatically.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#upload-section" class="px-6 py-3 bg-accent1 text-white rounded-md font-medium hover:bg-accent1/90 transition-all shadow-[0_0_15px_0px_rgba(99,102,241,0.5)] cursor-pointer">
@@ -140,7 +148,7 @@ scrollbar-width: none;
                     </div>
                 </div>
                 <div class="md:w-1/2">
-                    <img class="w-full h-auto rounded-lg shadow-[0_0_30px_0px_rgba(99,102,241,0.3)]" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7736c8ad29-af75e4bfe730bb20d229.png" alt="futuristic dashboard with neon glowing elements showing a WordPress content uploader interface with data visualization in dark mode with purple and teal accents" />
+                    <img class="w-full h-auto rounded-lg shadow-[0_0_30px_0px_rgba(99,102,241,0.3)]" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7736c8ad29-af75e4bfe730bb20d229.png" alt="futuristic dashboard with neon glowing elements showing a PostPilot interface with data visualization in dark mode with purple and teal accents" />
                 </div>
             </div>
         </div>
@@ -407,7 +415,7 @@ scrollbar-width: none;
     <!-- Footer -->
     <footer class="py-12 px-4 border-t border-gray-200 dark:border-gray-800">
         <div class="container mx-auto text-center text-gray-600 dark:text-gray-400">
-            <p>&copy; 2024 WordPress Content Uploader. All rights reserved.</p>
+            <p>&copy; 2024 PostPilot. All rights reserved.</p>
             <p class="text-sm">Powered by AI & Your Creativity</p>
         </div>
     </footer>

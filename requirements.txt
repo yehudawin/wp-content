@@ -6,3 +6,5 @@ openai
 beautifulsoup4
 werkzeug
 gunicorn
+flask-httpauth
+pytest

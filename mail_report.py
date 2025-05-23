@@ -2,8 +2,12 @@ import os
 import smtplib
 from email.message import EmailMessage
 from dotenv import load_dotenv
+import logging
 
 load_dotenv()
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 def send_report_email(filepath: str):
     """
@@ -21,10 +25,10 @@ def send_report_email(filepath: str):
     email_receiver = os.getenv('EMAIL_RECEIVER')
 
     if not all([email_user, email_password, email_receiver]):
-        print("[MAIL REPORT] Missing .env values for Gmail sending.")
+        logger.error("[MAIL REPORT] Missing .env values for Gmail sending.")
         raise ValueError("Missing .env values for email sending.")
 
-    print(f"[MAIL REPORT] Starting to send report to: {email_receiver}")
+    logger.info(f"[MAIL REPORT] Starting to send report to: {email_receiver}")
     msg = EmailMessage()
     msg['Subject'] = 'WordPress Upload Report'
     msg['From'] = email_user
@@ -38,12 +42,12 @@ def send_report_email(filepath: str):
         msg.add_attachment(file_data, maintype='application', subtype='octet-stream', filename=filename)
 
     try:
-        print(f"[MAIL REPORT] Connecting to Gmail SMTP: {email_host}:{email_port}")
+        logger.info(f"[MAIL REPORT] Connecting to Gmail SMTP: {email_host}:{email_port}")
         with smtplib.SMTP(email_host, email_port) as server:
             server.starttls()
             server.login(email_user, email_password)
-            print("[MAIL REPORT] Sending email...")
+            logger.info("[MAIL REPORT] Sending email...")
             server.send_message(msg)
-            print("[MAIL REPORT] Email sent successfully via Gmail!")
+            logger.info("[MAIL REPORT] Email sent successfully via Gmail!")
     except Exception as e:
-        print(f"[MAIL REPORT] Failed to send email: {e}")
+        logger.error(f"[MAIL REPORT] Failed to send email: {e}")
